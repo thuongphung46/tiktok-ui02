@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "jsx": "react",
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+      "sourceMap": true
+    },
+    "exclude": [
+        "css",
+    ]
+  }
