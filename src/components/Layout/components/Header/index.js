@@ -19,6 +19,8 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
+import { title } from 'process';
+import MenuItem from 'components/Popper/Menu/MenuItem';
 
 const cs = classNames.bind(styles);
 
@@ -26,6 +28,21 @@ const MENU_ITEMS = [
   {
     icon: <FontAwesomeIcon icon={faEarthAsia} />,
     title: 'English',
+    children: {
+      title: 'Language',
+      data: [
+        {
+          type: 'Language',
+          code: 'en',
+          title: 'English',
+        },
+        {
+          type: 'Language',
+          code: 'vi',
+          title: 'Tiếng Việt',
+        },
+      ],
+    },
   },
   {
     icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -42,10 +59,21 @@ function Header() {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
+    // hover vô thì dừng khoảng '0' giây xog trả về mảng "[]"
     setTimeout(() => {
       setSearchResult([]);
     }, 0);
   }, []);
+
+  //handle logic in this
+  const handleMenuChange = (menuItem) => {
+    switch (menuItem.type) {
+      case 'Language':
+        //handle change language
+        break;
+      default:
+    }
+  };
 
   return (
     <header className={cs('wrapper')}>
@@ -95,7 +123,7 @@ function Header() {
             Login
           </Button>
 
-          <Menu items={MENU_ITEMS}>
+          <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
             <button className={cs('more-btn')}>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>

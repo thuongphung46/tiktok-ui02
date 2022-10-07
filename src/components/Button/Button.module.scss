@@ -1,7 +1,7 @@
-.wrapper {
+.wrapper-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   font-weight: 700;
   font-size: 16px;
   line-height: 22px;
@@ -9,7 +9,7 @@
   min-width: 100px;
   min-height: 36px;
   // padding: 7px 29px;
-  padding: 8px 18px;
+  padding: 8px 13px;
   border-radius: 5px;
   cursor: pointer;
   background-color: var(--white);
@@ -35,17 +35,26 @@
   }
 }
 .outline {
+  // nút viền đỏ
   color: var(--primary);
-
+}
+.fixWidth {
+  width: 100%;
+  margin-left: 0;
+  border-radius: 0;
+  border: none;
   &:hover {
     border-color: currentColor;
     background-color: rgba(254, 44, 85, 0.06);
   }
 }
 .primary {
+  //nút đỏ login
   background-color: var(--primary);
+
   color: var(--white);
   border-color: var(--primary);
+  justify-content: center;
   &:hover {
     border-color: var(--primary);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
