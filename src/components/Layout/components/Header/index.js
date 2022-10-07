@@ -13,29 +13,31 @@ import {
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
 import Tippy from '@tippyjs/react/headless';
+import Menu from '~/components/Popper/Menu';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
-import Menu from 'components/Popper/Menu';
+
 const cs = classNames.bind(styles);
 
-/*const MENU_ITEMS =[
-    {
-        icon:<FontAwesomeIcon icon={faEarthAsia}/>,
-        title: 'English',
-    },
-    {
-        icon:<FontAwesomeIcon icon={faCircleQuestion}/>,
-        title: 'Feedback and help',
-        to: "/feedback" //link nội bộ dùng to
-    },
-    {
-        icon:<FontAwesomeIcon icon={faKeyboard}/>,
-        title: 'Keyboard shortcuts',
-    },
-];*/
+const MENU_ITEMS = [
+  {
+    icon: <FontAwesomeIcon icon={faEarthAsia} />,
+    title: 'English',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+    title: 'Feedback and help',
+    to: '/feedback', //link nội bộ dùng "to"
+  },
+  {
+    icon: <FontAwesomeIcon icon={faKeyboard} />,
+    title: 'Keyboard shortcuts',
+  },
+];
+
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
 
@@ -49,7 +51,6 @@ function Header() {
     <header className={cs('wrapper')}>
       <div className={cs('inner')}>
         <div className={cs('logo')}>
-          {/* logo tiktok*/}
           <Button home to={'/'}>
             <img src={images.logo} alt="tiktok" />
           </Button>
@@ -57,7 +58,7 @@ function Header() {
 
         <Tippy
           interactive={true}
-          visible={searchResult.length > 0}
+          // visible={searchResult.length > 0}
           render={(attrs) => (
             <div className={cs('search-result')} tabIndex="-1" {...attrs}>
               <PopperWrapper>
@@ -94,11 +95,11 @@ function Header() {
             Login
           </Button>
 
-          {/* <Menu>
+          <Menu items={MENU_ITEMS}>
             <button className={cs('more-btn')}>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
-          </Menu> */}
+          </Menu>
         </div>
       </div>
     </header>
