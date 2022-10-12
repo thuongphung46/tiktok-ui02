@@ -1,17 +1,26 @@
 import Button from 'components/Button';
 
-import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
-const cs = classNames.bind(styles);
-function MenuItem({ data, onClick }) {
-  const classes = cs('menu-item', {
-    separate: data.separate,
-  });
+import className from 'classnames/bind';
+const cs = className.bind(styles);
 
+function MenuItem({ data, onClick }) {
   return (
-    <Button className={classes} lelfIcon={data.icon} to={data.to} onClick={onClick}>
-      {data.title}
-    </Button>
+    <>
+      {data.separate ? (
+        <>
+          <Button separate lelfIcon={data.icon} to={data.to} onClick={onClick}>
+            {data.title}
+          </Button>
+        </>
+      ) : (
+        <>
+          <Button fixWidth lelfIcon={data.icon} to={data.to} onClick={onClick}>
+            {data.title}
+          </Button>
+        </>
+      )}
+    </>
   );
 }
 

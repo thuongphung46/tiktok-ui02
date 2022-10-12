@@ -9,12 +9,10 @@ import {
   faEarthAsia,
   faCircleQuestion,
   faKeyboard,
-  faMessage,
   faUser,
   faCoins,
   faGears,
   faSignOut,
-  faCloudArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
@@ -27,6 +25,7 @@ import styles from './Header.module.scss';
 // import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
 import 'tippy.js/dist/tippy.css';
+import { MessageIcon, UploadIcon } from 'components/Icon/Icons';
 // import { title } from 'process';
 // import MenuItem from 'components/Popper/Menu/MenuItem';
 
@@ -63,32 +62,31 @@ const MENU_ITEMS = [
   },
 ];
 
-const userMenu = [
-  {
-    icon: <FontAwesomeIcon icon={faUser} />,
-    title: 'View profile',
-    to: '/@hoaa',
-  },
-  {
-    icon: <FontAwesomeIcon icon={faCoins} />,
-    title: 'Get coins',
-    to: '/coin',
-  },
-  {
-    icon: <FontAwesomeIcon icon={faGears} />,
-    title: 'Settings',
-    to: '/settings',
-  },
-  ...MENU_ITEMS,
-  {
-    icon: <FontAwesomeIcon icon={faSignOut} />,
-    title: 'Log out',
-    to: '/logout',
-    separate: true,
-  },
-];
-
 function Header() {
+  const userMenu = [
+    {
+      icon: <FontAwesomeIcon icon={faUser} />,
+      title: 'View profile',
+      to: '/@hoaa',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCoins} />,
+      title: 'Get coins',
+      to: '/coin',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faGears} />,
+      title: 'Settings',
+      to: '/settings',
+    },
+    ...MENU_ITEMS,
+    {
+      icon: <FontAwesomeIcon icon={faSignOut} />,
+      title: 'Log out',
+      to: '/logout',
+      separate: true,
+    },
+  ];
   // const [searchResult, setSearchResult] = useState([]);
 
   // useEffect(() => {
@@ -120,7 +118,8 @@ function Header() {
         </div>
 
         <HeadlessTippy
-          interactive={true}
+          interactive
+          delay={[0, 700]}
           // visible={searchResult.length > 0}
           render={(attrs) => (
             <div className={cs('search-result')} tabIndex="-1" {...attrs}>
@@ -156,13 +155,13 @@ function Header() {
             <>
               <Tippy delay={[0, 50]} content="upload">
                 <button className={cs('action-btn')}>
-                  <FontAwesomeIcon icon={faCloudArrowUp} />
+                  <UploadIcon />
                 </button>
               </Tippy>
 
               <Tippy delay={[0, 50]} content="Message">
                 <button className={cs('action-btn')}>
-                  <FontAwesomeIcon icon={faMessage} />
+                  <MessageIcon />
                 </button>
               </Tippy>
             </>

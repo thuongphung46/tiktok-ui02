@@ -1,11 +1,10 @@
-import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MenuItem from './MenuItem';
 import Header from './Header';
-
-import styles from './Menu.module.scss';
 import { useState } from 'react';
+import styles from './Menu.module.scss';
+import classNames from 'classnames/bind';
 const cs = classNames.bind(styles);
 const defaultFn = () => {}; //default funtion trống
 
@@ -31,11 +30,29 @@ function Menu({ children, items = [], onChange = defaultFn }) {
       );
     });
   };
+  const handleBack = () => {
+    setHistory((prev) => prev.slice(0, prev.length - 1));
+  };
+
+  const renderResult = (attrs) => (
+    <div className={cs('menu-list')} tabIndex="-1" {...attrs}>
+      <PopperWrapper className={cs('menu-popper')}>
+        {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
+        <div className={cs('menu-body')}>{renderItems()}</div>
+      </PopperWrapper>
+    </div>
+  );
+
+  // Reset to first page
+  const handleReset = () => {
+    setHistory((prev) => prev.slice(0, 1));
+  };
 
   return (
     <Tippy
       interactive
-      // visible
+      // visible //hiện hoặc ẩn thanh menu
+      offset={[13, 8]}
       delay={[0, 700]}
       placement="bottom-end"
       render={(attrs) => (

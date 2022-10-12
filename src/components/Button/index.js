@@ -15,8 +15,9 @@ function Button({
   text = false,
   fixWidth = false,
   disabled = false,
-  separate = false,
   lelfIcon,
+  separate,
+  data,
   rightIcon,
   onClick,
   children,
@@ -55,9 +56,9 @@ function Button({
     large, //css border cỡ lớn
     text, //css cho text
     rounded,
-    separate,
     lelfIcon,
     rightIcon,
+    separate,
     fixWidth,
     home,
     className: [className], //css riêng cho nút bấm
