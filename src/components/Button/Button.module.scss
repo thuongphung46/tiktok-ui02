@@ -8,6 +8,7 @@
   margin-left: 16px;
   min-width: 100px;
   min-height: 36px;
+  color: rgba(22, 24, 35, 1);
   // padding: 7px 29px;
   padding: 8px 13px;
   border-radius: 5px;
@@ -22,6 +23,10 @@
     pointer-events: none;
   }
 }
+.separate {
+  border-top: 1px solid rgba(22, 24, 35, 0.12);
+}
+
 .rounded {
   border-color: rgba(22, 24, 35, 0.12);
   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);

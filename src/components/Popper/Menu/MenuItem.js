@@ -4,8 +4,12 @@ import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
 const cs = classNames.bind(styles);
 function MenuItem({ data, onClick }) {
+  const classes = cs('menu-item', {
+    separate: data.separate,
+  });
+
   return (
-    <Button fixWidth className={cs('menu-item')} lelfIcon={data.icon} to={data.to} onClick={onClick}>
+    <Button className={classes} lelfIcon={data.icon} to={data.to} onClick={onClick}>
       {data.title}
     </Button>
   );

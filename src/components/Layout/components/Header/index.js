@@ -9,18 +9,26 @@ import {
   faEarthAsia,
   faCircleQuestion,
   faKeyboard,
+  faMessage,
+  faUser,
+  faCoins,
+  faGears,
+  faSignOut,
+  faCloudArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Button from '~/components/Button';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
 import Menu from '~/components/Popper/Menu';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
-import { title } from 'process';
-import MenuItem from 'components/Popper/Menu/MenuItem';
+import 'tippy.js/dist/tippy.css';
+// import { title } from 'process';
+// import MenuItem from 'components/Popper/Menu/MenuItem';
 
 const cs = classNames.bind(styles);
 
@@ -55,15 +63,40 @@ const MENU_ITEMS = [
   },
 ];
 
-function Header() {
-  const [searchResult, setSearchResult] = useState([]);
+const userMenu = [
+  {
+    icon: <FontAwesomeIcon icon={faUser} />,
+    title: 'View profile',
+    to: '/@hoaa',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faCoins} />,
+    title: 'Get coins',
+    to: '/coin',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faGears} />,
+    title: 'Settings',
+    to: '/settings',
+  },
+  ...MENU_ITEMS,
+  {
+    icon: <FontAwesomeIcon icon={faSignOut} />,
+    title: 'Log out',
+    to: '/logout',
+    separate: true,
+  },
+];
 
-  useEffect(() => {
-    // hover vô thì dừng khoảng '0' giây xog trả về mảng "[]"
-    setTimeout(() => {
-      setSearchResult([]);
-    }, 0);
-  }, []);
+function Header() {
+  // const [searchResult, setSearchResult] = useState([]);
+
+  // useEffect(() => {
+  //   // hover vô thì dừng khoảng '0' giây xog trả về mảng "[]"
+  //   setTimeout(() => {
+  //     setSearchResult([]);
+  //   }, 0);
+  // }, []);
 
   //handle logic in this
   const handleMenuChange = (menuItem) => {
@@ -75,6 +108,8 @@ function Header() {
     }
   };
 
+  const currentUser = true;
+
   return (
     <header className={cs('wrapper')}>
       <div className={cs('inner')}>
@@ -84,7 +119,7 @@ function Header() {
           </Button>
         </div>
 
-        <Tippy
+        <HeadlessTippy
           interactive={true}
           // visible={searchResult.length > 0}
           render={(attrs) => (
@@ -113,20 +148,47 @@ function Header() {
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
-        </Tippy>
+        </HeadlessTippy>
 
-        <div classNames={cs('acctions')}>
-          <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/upload">
-            Upload
-          </Button>
-          <Button primary outline to="/login">
-            Login
-          </Button>
+        {/* phần actions icon */}
+        <div className={cs('acctions-right')}>
+          {currentUser ? (
+            <>
+              <Tippy delay={[0, 50]} content="upload">
+                <button className={cs('action-btn')}>
+                  <FontAwesomeIcon icon={faCloudArrowUp} />
+                </button>
+              </Tippy>
 
-          <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-            <button className={cs('more-btn')}>
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
+              <Tippy delay={[0, 50]} content="Message">
+                <button className={cs('action-btn')}>
+                  <FontAwesomeIcon icon={faMessage} />
+                </button>
+              </Tippy>
+            </>
+          ) : (
+            <>
+              <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/upload">
+                Upload
+              </Button>
+              <Button primary outline to="/login">
+                Login
+              </Button>
+            </>
+          )}
+          {/* phần menu avatar action */}
+          <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+            {currentUser ? (
+              <img
+                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/a724dd059cac9304493b01c82c51b4f1~c5_100x100.jpeg?x-expires=1665540000&x-signature=WlyoDOmLwGjvXpw8o2K0dDxgsJY%3D"
+                className={cs('user-avatar')}
+                alt="Nguyen Van A"
+              />
+            ) : (
+              <button className={cs('more-btn')}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+            )}
           </Menu>
         </div>
       </div>
