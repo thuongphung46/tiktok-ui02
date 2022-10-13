@@ -19,6 +19,7 @@ import Button from '~/components/Button';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import Menu from '~/components/Popper/Menu';
+// import Image from '~/components/';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
@@ -120,6 +121,7 @@ function Header() {
         <HeadlessTippy
           interactive
           delay={[0, 700]}
+          visible
           // visible={searchResult.length > 0}
           render={(attrs) => (
             <div className={cs('search-result')} tabIndex="-1" {...attrs}>
