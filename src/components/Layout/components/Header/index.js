@@ -25,7 +25,7 @@ import styles from './Header.module.scss';
 // import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
 import 'tippy.js/dist/tippy.css';
-import { MessageIcon, UploadIcon } from 'components/Icon/Icons';
+import { InboxIcon, MessageIcon, UploadIcon } from 'components/Icon/Icons';
 // import { title } from 'process';
 // import MenuItem from 'components/Popper/Menu/MenuItem';
 
@@ -162,6 +162,12 @@ function Header() {
               <Tippy delay={[0, 50]} content="Message">
                 <button className={cs('action-btn')}>
                   <MessageIcon />
+                </button>
+              </Tippy>
+
+              <Tippy delay={[0, 50]} content="mailbox">
+                <button className={cs('action-btn')}>
+                  <InboxIcon />
                 </button>
               </Tippy>
             </>
