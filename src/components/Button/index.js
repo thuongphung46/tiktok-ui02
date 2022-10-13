@@ -72,5 +72,4 @@ function Button({
     </Comp>
   );
 }
-
 export default Button;

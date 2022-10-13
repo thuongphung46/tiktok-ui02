@@ -23,10 +23,12 @@ import Menu from '~/components/Popper/Menu';
 
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AccountItem from 'components/AccountItem';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessageIcon, UploadIcon } from 'components/Icon/Icons';
+
+import Image from 'components/Image';
 // import { title } from 'process';
 // import MenuItem from 'components/Popper/Menu/MenuItem';
 
@@ -88,14 +90,16 @@ function Header() {
       separate: true,
     },
   ];
-  // const [searchResult, setSearchResult] = useState([]);
 
-  // useEffect(() => {
-  //   // hover vô thì dừng khoảng '0' giây xog trả về mảng "[]"
-  //   setTimeout(() => {
-  //     setSearchResult([]);
-  //   }, 0);
-  // }, []);
+  const currentUser = true;
+  const [searchResult, setSearchResult] = useState([]);
+
+  useEffect(() => {
+    // hover vô thì dừng khoảng '0' giây xog trả về mảng "[]"
+    setTimeout(() => {
+      setSearchResult([1, 1, 1]);
+    }, 0);
+  }, []);
 
   //handle logic in this
   const handleMenuChange = (menuItem) => {
@@ -106,8 +110,6 @@ function Header() {
       default:
     }
   };
-
-  const currentUser = true;
 
   return (
     <header className={cs('wrapper')}>
@@ -121,8 +123,8 @@ function Header() {
         <HeadlessTippy
           interactive
           delay={[0, 700]}
-          visible
-          // visible={searchResult.length > 0}
+          // visible
+          visible={searchResult.length > 0}
           render={(attrs) => (
             <div className={cs('search-result')} tabIndex="-1" {...attrs}>
               <PopperWrapper>
@@ -186,10 +188,11 @@ function Header() {
           {/* phần menu avatar action */}
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
-              <img
+              <Image
                 src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/a724dd059cac9304493b01c82c51b4f1~c5_100x100.jpeg?x-expires=1665540000&x-signature=WlyoDOmLwGjvXpw8o2K0dDxgsJY%3D"
                 className={cs('user-avatar')}
                 alt="Nguyen Van A"
+                fallback="link ảnh thay thế "
               />
             ) : (
               <button className={cs('more-btn')}>
