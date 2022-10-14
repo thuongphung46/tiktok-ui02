@@ -30,23 +30,8 @@ function Menu({ children, items = [], onChange = defaultFn }) {
       );
     });
   };
-  const handleBack = () => {
-    setHistory((prev) => prev.slice(0, prev.length - 1));
-  };
-
-  const renderResult = (attrs) => (
-    <div className={cs('menu-list')} tabIndex="-1" {...attrs}>
-      <PopperWrapper className={cs('menu-popper')}>
-        {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
-        <div className={cs('menu-body')}>{renderItems()}</div>
-      </PopperWrapper>
-    </div>
-  );
 
   // Reset to first page
-  const handleReset = () => {
-    setHistory((prev) => prev.slice(0, 1));
-  };
 
   return (
     <Tippy
