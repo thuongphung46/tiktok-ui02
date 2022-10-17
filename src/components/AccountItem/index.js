@@ -9,14 +9,14 @@ const cs = classNames.bind(styles);
 
 function AccountItem({ data }) {
   return (
-    <Link to={'/@${data.nickname}'} className={cs('wrapper')}>
+    <Link to={`/@${data.nickname}`} className={cs('wrapper')}>
       <Image className={cs('avatar')} src={data.avatar} alt={data.full_name} />
       <div className={cs('info')}>
         <p className={cs('name')}>
           <span>{data.full_name}</span>
           {data.tick && <FontAwesomeIcon className={cs('check')} icon={faCheckCircle} />}
         </p>
-        <span className={cs('username')}>{data.full_name}</span>
+        <span className={cs('username')}>{data.nickname}</span>
       </div>
     </Link>
   );

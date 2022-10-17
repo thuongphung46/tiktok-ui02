@@ -12,17 +12,16 @@ import {
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '~/components/Button';
 import Tippy from '@tippyjs/react';
 import Menu from '~/components/Popper/Menu';
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessageIcon, UploadIcon } from 'components/Icon/Icons';
 import Image from 'components/Image';
 import Search from '../Search';
-// import { title } from 'process';
-// import MenuItem from 'components/Popper/Menu/MenuItem';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames/bind';
+import styles from './Header.module.scss';
+import Button from '~/components/Button';
 
 const cs = classNames.bind(styles);
 
@@ -33,6 +32,26 @@ const MENU_ITEMS = [
     children: {
       title: 'Language',
       data: [
+        {
+          type: 'Language',
+          code: 'en',
+          title: 'English',
+        },
+        {
+          type: 'Language',
+          code: 'vi',
+          title: 'Tiếng Việt',
+        },
+        {
+          type: 'Language',
+          code: 'en',
+          title: 'English',
+        },
+        {
+          type: 'Language',
+          code: 'vi',
+          title: 'Tiếng Việt',
+        },
         {
           type: 'Language',
           code: 'en',
@@ -83,7 +102,7 @@ function Header() {
     },
   ];
 
-  const currentUser = true;
+  const currentUser = false;
   //searchResult
 
   //handle logic in this
@@ -100,9 +119,11 @@ function Header() {
     <header className={cs('wrapper')}>
       <div className={cs('inner')}>
         <div className={cs('logo')}>
-          <Button home to={'/'}>
+          <Link to={'/'}>
             <img src={images.logo} alt="tiktok" />
-          </Button>
+          </Link>
+          {/* <Button home to={'/'}>
+          </Button> */}
         </div>
 
         {/* phần search */}
@@ -143,10 +164,10 @@ function Header() {
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
-                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/a724dd059cac9304493b01c82c51b4f1~c5_100x100.jpeg?x-expires=1665540000&x-signature=WlyoDOmLwGjvXpw8o2K0dDxgsJY%3D"
+                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/7ed24eae83ade506fd0f42bb175c37e1~c5_100x100.jpeg?x-expires=1666166400&x-signature=FRnTOaBuuYdmMU9XPqSqxcjjMS4%3D"
                 className={cs('user-avatar')}
                 alt="Nguyen Van A"
-                fallback="link ảnh thay thế "
+                fallback="link ảnh thay thế " //link ảnh thay thế trong th bị lỗi
               />
             ) : (
               <button className={cs('more-btn')}>

@@ -23,33 +23,6 @@ function Search() {
   const debouncedValue = useDebounce(searchValue, 500);
 
   const inputRef = useRef('');
-
-  // useEffect(() => {
-  //   // hover vô thì dừng khoảng '0' giây xog callback trả về mảng "[]"
-  //   if (!debounced.trim()) {
-  //     // searchResult([]);
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   //XMLHTTPRequest
-  //   //Fetch
-
-  //   // full_name -> fullname
-  //   axios
-  //     .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
-  //       params: {
-  //         q: debounced,
-  //         type: 'less',
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setSearchResult(res.data.data);
-  //       setLoading(false);
-  //     })
-  //     .catch(() => {
-  //       setLoading(false);
-  //     });
-  // }, [debounced]);
   useEffect(() => {
     if (!debouncedValue.trim()) {
       setSearchResult([]);
@@ -78,55 +51,67 @@ function Search() {
   const handleHideResult = () => {
     setShowResult(false);
   };
-  return (
-    <HeadlessTippy
-      interactive
-      delay={[0, 700]}
-      placement="bottom-end" //cố định tipp
-      // visible
-      visible={showResult && searchResult.length > 0}
-      render={(attrs) => (
-        <div className={cs('search-result')} tabIndex="-1" {...attrs}>
-          <PopperWrapper>
-            <h4 className={cs('search-title')}>Accounts</h4>
-            {searchResult.map((result) => (
-              <AccountItem key={result.id} data={result} />
-            ))}
-          </PopperWrapper>
-        </div>
-      )}
-      onClickOutside={handleHideResult}
-    >
-      <div className={cs('search')}>
-        {/*search */}
-        <input
-          ref={inputRef}
-          value={searchValue}
-          placeholder="search accounts and videos"
-          spellCheck={false}
-          onChange={(e) => setSearchValue(e.target.value)}
-          onFocus={() => setShowResult(true)}
-        />
-        {!!searchValue &&
-          !loading && ( //khi có searchValue thì mới có icon
-            <button
-              className={cs('clear')}
-              onClick={() => {
-                handleClear();
-              }}
-            >
-              {/*clear */}
-              <FontAwesomeIcon icon={faCircleXmark} />
-            </button>
-          )}
+  const handleChange = (e) => {
+    // ko cho phép nhập ký tự đầu tiên là space
+    const searchValue = e.target.value;
+    if (!searchValue.startsWith(' ')) {
+      setSearchValue(searchValue);
+    }
+  };
 
-        {loading && <FontAwesomeIcon className={cs('spinner')} icon={faSpinner} />}
-        <button className={cs('search-btn')}>
-          {/*icon search */}
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
-      </div>
-    </HeadlessTippy>
+  return (
+    <div>
+      <HeadlessTippy
+        appendTo={() => document.body}
+        interactive
+        delay={[0, 700]}
+        placement="bottom-end" //cố định tipp
+        // visible
+        visible={showResult && searchResult.length > 0}
+        render={(attrs) => (
+          <div className={cs('search-result')} tabIndex="-1" {...attrs}>
+            <PopperWrapper>
+              <h4 className={cs('search-title')}>Accounts</h4>
+              {searchResult.map((result) => (
+                <AccountItem key={result.id} data={result} />
+              ))}
+            </PopperWrapper>
+          </div>
+        )}
+        onClickOutside={handleHideResult}
+      >
+        <div className={cs('search')}>
+          {/*search */}
+          <input
+            ref={inputRef}
+            value={searchValue}
+            placeholder="search accounts and videos"
+            spellCheck={false}
+            // onChange={(e) => setSearchValue(e.target.value)}
+            onChange={handleChange}
+            onFocus={() => setShowResult(true)}
+          />
+          {!!searchValue &&
+            !loading && ( //khi có searchValue thì mới có icon
+              <button
+                className={cs('clear')}
+                onClick={() => {
+                  handleClear();
+                }}
+              >
+                {/*clear */}
+                <FontAwesomeIcon icon={faCircleXmark} />
+              </button>
+            )}
+
+          {loading && <FontAwesomeIcon className={cs('spinner')} icon={faSpinner} />}
+          <button className={cs('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+            {/*icon search */}
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+        </div>
+      </HeadlessTippy>
+    </div>
   );
 }
 
