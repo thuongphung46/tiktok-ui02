@@ -5,6 +5,10 @@ import { faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState, useRef } from 'react';
+import useDebounce from '../../../../Hooks//useDebounce';
+// import searchServices from '../../../../services/searchService';
+import * as searchServices from '~/services/searchService';
+// import { useDebounce } from 'Hooks';
 
 import styles from './Search.module.scss';
 import classNames from 'classnames/bind';
@@ -16,25 +20,53 @@ function Search() {
   const [showResult, setShowResult] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const debouncedValue = useDebounce(searchValue, 500);
+
   const inputRef = useRef('');
 
+  // useEffect(() => {
+  //   // hover vô thì dừng khoảng '0' giây xog callback trả về mảng "[]"
+  //   if (!debounced.trim()) {
+  //     // searchResult([]);
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   //XMLHTTPRequest
+  //   //Fetch
+
+  //   // full_name -> fullname
+  //   axios
+  //     .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
+  //       params: {
+  //         q: debounced,
+  //         type: 'less',
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setSearchResult(res.data.data);
+  //       setLoading(false);
+  //     })
+  //     .catch(() => {
+  //       setLoading(false);
+  //     });
+  // }, [debounced]);
   useEffect(() => {
-    // hover vô thì dừng khoảng '0' giây xog callback trả về mảng "[]"
-    if (!searchValue.trim()) {
-      // searchResult([]);
+    if (!debouncedValue.trim()) {
+      setSearchResult([]);
       return;
     }
-    setLoading(true);
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${searchValue}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, [searchValue]);
+
+    const fetchApi = async () => {
+      setLoading(true);
+
+      const result = await searchServices.search(debouncedValue);
+
+      setSearchResult(result);
+      setLoading(false);
+    };
+
+    fetchApi();
+  }, [debouncedValue]);
   // eslint-disable-next-line no-template-curly-in-string
 
   const handleClear = () => {

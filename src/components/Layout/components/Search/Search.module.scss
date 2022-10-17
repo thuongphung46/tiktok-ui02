@@ -46,12 +46,28 @@
 .clear,
 .spinner {
   position: absolute;
-  right: 52px;
+  right: calc(var(--search-button-width) + 16px);
   top: 50%;
-  padding-right: 12px;
+  padding: 0;
   transform: translateY(-50%);
   color: rgba(22, 24, 35, 0.34);
 }
+.spinner {
+  animation: loading 0.8s linear infinite;
+  // animation: loading 0.9s infinite;
+}
+@keyframes loading {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+  // 50% {
+  //   transform: rotate(360deg);
+  // }
+}
+
 .search-btn {
   width: 52px;
   color: rgba(22, 24, 35, 0.34);
