@@ -34,6 +34,12 @@
   font-size: 2.2rem;
   padding: 4px 12px;
   cursor: pointer;
+  &:hover {
+    color: rgb(226, 59, 59);
+  }
+  &:active {
+    color: rgb(182, 180, 177);
+  }
 }
 .user-avatar {
   width: 32px;

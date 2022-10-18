@@ -65,16 +65,17 @@ function Search() {
         appendTo={() => document.body}
         interactive
         delay={[0, 700]}
-        placement="bottom-end" //cố định tipp
-        // visible
+        placement="bottom-end" //cố định tippy
         visible={showResult && searchResult.length > 0}
         render={(attrs) => (
           <div className={cs('search-result')} tabIndex="-1" {...attrs}>
             <PopperWrapper>
-              <h4 className={cs('search-title')}>Accounts</h4>
-              {searchResult.map((result) => (
-                <AccountItem key={result.id} data={result} />
-              ))}
+              <div className={cs('search-body')}>
+                <h4 className={cs('search-title')}>Accounts</h4>
+                {searchResult.map((result) => (
+                  <AccountItem key={result.id} data={result} />
+                ))}
+              </div>
             </PopperWrapper>
           </div>
         )}

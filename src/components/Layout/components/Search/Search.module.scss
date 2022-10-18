@@ -19,6 +19,7 @@
     background-color: transparent;
     height: 100%;
     color: black;
+    margin-right: 48px;
   }
   input:not(:placeholder-shown) ~ .search-btn {
     color: rgb(22, 24, 35, 0.75);
@@ -51,8 +52,6 @@
   padding: 0;
   transform: translateY(-50%);
   color: rgba(22, 24, 35, 0.34);
-
-  padding: 0px 12px;
 }
 .spinner {
   animation: loading 0.8s linear infinite;
@@ -84,4 +83,7 @@
   &:active {
     background: rgba(22, 24, 35, 0.06);
   }
+}
+.search-body {
+  overflow-y: auto;
 }

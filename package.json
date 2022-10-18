@@ -16,7 +16,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
-    "@types/node": "^18.7.21",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
@@ -39,6 +38,7 @@
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
     "@types/jest": "^29.0.3",
+    "@types/node": "^18.11.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "customize-cra": "^1.0.0",

@@ -22,7 +22,6 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
-
 const cs = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -133,9 +132,11 @@ function Header() {
           {currentUser ? (
             <>
               <Tippy delay={[0, 50]} content="upload">
-                <button className={cs('action-btn')}>
-                  <UploadIcon />
-                </button>
+                <Link to={'/upload'}>
+                  <button className={cs('action-btn')}>
+                    <UploadIcon />
+                  </button>
+                </Link>
               </Tippy>
 
               <Tippy delay={[0, 50]} content="Message">

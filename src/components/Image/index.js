@@ -1,9 +1,9 @@
 import { forwardRef, useState } from 'react';
 import images from 'accsets/images';
-import styles from './Image.module.scss';
-import classNames from 'classnames/bind';
+// import styles from './Image.module.scss';
+// import classNames from 'classnames/bind';
 
-const cs = classNames.bind(styles);
+// const cs = classNames.bind(styles);
 const Image = forwardRef(({ src, alt, fallback: custtomFallback = images.noImage, ...props }, ref) => {
   const [fallBackInner, setFallback] = useState('');
 
