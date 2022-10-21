@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './styles.css';
 import { login } from './api';
+import Banner from '../accsets/images';
 
 interface LoginState {
   password: string;
@@ -79,17 +80,15 @@ export default function Login() {
 
   return (
     <div className="App-formLogin">
-      <div></div>
-
-      <div className="login-container">
-        {isLoggedIn ? (
-          <>
-            <p>{`Hello ${username}`}</p>
-            <button type="button" onClick={() => dispatch({ type: 'logout' })}>
-              Log out
-            </button>
-          </>
-        ) : (
+      {isLoggedIn ? (
+        <>
+          <p>{`Hello ${username}`}</p>
+          <button type="button" onClick={() => dispatch({ type: 'logout' })}>
+            Log out
+          </button>
+        </>
+      ) : (
+        <form className="wrap-form">
           <form className="form" onSubmit={onSubmit}>
             {error && <p className="error">{error}</p>}
             <p> PLease Login!</p>
@@ -124,8 +123,8 @@ export default function Login() {
               {isLoading ? 'Loggin in.....' : 'Login In'}
             </button>
           </form>
-        )}
-      </div>
+        </form>
+      )}
     </div>
   );
 }

@@ -96,12 +96,12 @@ function Header() {
     {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       title: 'Log out',
-      to: '/logout',
+      to: '/login',
       separate: true,
     },
   ];
 
-  const currentUser = false;
+  const currentUser = true;
   //searchResult
 
   //handle logic in this
@@ -153,7 +153,7 @@ function Header() {
             </>
           ) : (
             <>
-              <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/upload">
+              <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/login">
                 Upload
               </Button>
               <Button primary outline to="/login">
