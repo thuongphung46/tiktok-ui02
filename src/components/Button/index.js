@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+
 import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 const cs = classNames.bind(styles);
@@ -72,4 +73,5 @@ function Button({
     </Comp>
   );
 }
+
 export default Button;

@@ -1,8 +1,8 @@
 import Button from 'components/Button';
 
-import styles from './Menu.module.scss';
-import className from 'classnames/bind';
-const cs = className.bind(styles);
+// import styles from './Menu.module.scss';
+// import className from 'classnames/bind';
+// const cs = className.bind(styles);
 
 function MenuItem({ data, onClick }) {
   return (

@@ -22,7 +22,7 @@
 export const login = async (creds: { username: string; password: string }): Promise<void> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (creds.username === 'thuong' && creds.password === '123') {
+      if (creds.username === 'thuong' && creds.password === 'thuong') {
         resolve();
       } else {
         reject();

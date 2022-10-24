@@ -11,6 +11,7 @@ import {
   faGears,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
+// import { useDispatch } from 'react-redux';
 
 import Tippy from '@tippyjs/react';
 import Menu from '~/components/Popper/Menu';
@@ -76,6 +77,13 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
+  // const dispatch = useDispatch();
+
+  // const logOut = useCallback(() => {
+  //   dispatch(logout());
+  // }, [dispatch]);
+
+  //menu phầm acction
   const userMenu = [
     {
       icon: <FontAwesomeIcon icon={faUser} />,
@@ -96,6 +104,7 @@ function Header() {
     {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       title: 'Log out',
+
       to: '/login',
       separate: true,
     },

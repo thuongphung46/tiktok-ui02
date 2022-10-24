@@ -1,4 +1,5 @@
 import * as httpRequest from '~/utils/httpRequest';
+console.log(process.env);
 
 export const search = async (q, type = 'less') => {
   try {

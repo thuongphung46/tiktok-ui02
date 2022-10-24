@@ -1,14 +1,29 @@
-import styles from './SlideBar.module.scss';
 import classNames from 'classnames/bind';
-import { config } from 'process';
-import Menu from 'components/Popper/Menu';
-const cs = classNames.bind(styles);
+import styles from './SlideBar.module.scss';
+// import styles from './Slidebar.module.scss';
+import Menu, { MenuItem } from './Menu';
+import { HomeIcon, HomeActiveIcon, UserGroupIcon, UserGroupActiveIcon, LiveIcon, LiveActiveIcon } from '../../../Icon';
+// import SuggestedAccounts from '~/components/SuggestedAccounts';
+import config from '~/config';
+
+const cx = classNames.bind(styles);
+
 function Sidebar() {
   return (
-    <aside className={cs('wrapper')}>
+    <aside className={cx('wrapper')}>
       <Menu>
-        <MenuItems title="For your" to={'/home'} />
+        <MenuItem title="For You" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
+        <MenuItem
+          title="Following"
+          to={config.routes.following}
+          icon={<UserGroupIcon />}
+          activeIcon={<UserGroupActiveIcon />}
+        />
+        <MenuItem title="LIVE" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveActiveIcon />} />
       </Menu>
+
+      {/* <SuggestedAccounts label="Suggested accounts" />
+      <SuggestedAccounts label="Following accounts" /> */}
     </aside>
   );
 }

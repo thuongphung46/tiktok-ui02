@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './styles.css';
 import { login } from './api';
-import Banner from '../accsets/images';
+// import Banner from '../accsets/images';
 
 interface LoginState {
   password: string;
@@ -47,6 +47,7 @@ const loginReducer = (state: LoginState, action: LoginAction): LoginState => {
       return {
         ...state,
         isLoggedIn: false,
+        // user: null,
       };
     }
     default:
