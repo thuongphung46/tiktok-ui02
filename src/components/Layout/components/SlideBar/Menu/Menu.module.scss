@@ -6,11 +6,12 @@
   font-weight: 700;
   border-radius: 4px;
   color: var(--text-color);
+  // color: black;
   transition: background-color ease-in-out 200ms;
 
   &.active {
     color: var(--primary);
-
+    // color: rgb(121, 219, 9);
     .icon {
       display: none;
     }

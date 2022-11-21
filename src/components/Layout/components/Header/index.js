@@ -11,7 +11,7 @@ import {
   faGears,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-// import { useDispatch } from 'react-redux';
+import Login from '../../../../features/auth/Login';
 
 import Tippy from '@tippyjs/react';
 import Menu from '~/components/Popper/Menu';
@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
+import { useState } from 'react';
 const cs = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -104,14 +105,18 @@ function Header() {
     {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       title: 'Log out',
-
-      to: '/login',
+      setCurrentUser:false,
+      to: "/login",
       separate: true,
+      
     },
   ];
 
-  const currentUser = true;
+  // const currentUser = useSelector(selectUser);
+  // const { user: currentUser } = useSelector((state) => state.auth);
+  const [currentUser, setCurrentUser] = useState({Login});
   //searchResult
+
 
   //handle logic in this
   const handleMenuChange = (menuItem) => {
@@ -123,11 +128,13 @@ function Header() {
     }
   };
 
+
+
   return (
     <header className={cs('wrapper')}>
       <div className={cs('inner')}>
         <div className={cs('logo')}>
-          <Link to={'/'}>
+          <Link to={'/home'}>
             <img src={images.logo} alt="tiktok" />
           </Link>
           {/* <Button home to={'/'}>
@@ -165,7 +172,7 @@ function Header() {
               <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/login">
                 Upload
               </Button>
-              <Button primary outline to="/login">
+              <Button primary outline to="/login" >
                 Login
               </Button>
             </>

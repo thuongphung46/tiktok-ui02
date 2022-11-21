@@ -9,7 +9,6 @@ function Upload() {
         <div className={cs('content')}>
           <span className={cs('css')}>Tải video lên</span>
           <span className={cs('css')}>Đăng video vào tài khoản của bạn</span>
-          <div></div>
         </div>
       </div>
     </div>
