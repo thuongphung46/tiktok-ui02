@@ -30,7 +30,7 @@ const Login=({setCurrentUser}) =>{
 
 			localStorage.setItem('token', data.user)
 			alert('Login successful');
-			window.location.href = '/home'
+			window.location.href = '/'
 		} else {
 			alert('Please check your username and password')
 		}
