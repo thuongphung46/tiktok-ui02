@@ -1,5 +1,6 @@
 import images from '~/accsets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'tippy.js/dist/tippy.css'
 import {
   faPlus,
   faEllipsisVertical,
@@ -11,11 +12,9 @@ import {
   faGears,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-import Login from '../../../../features/auth/Login';
-
+import AuthModal from '../../../../features/auth/Modal'
 import Tippy from '@tippyjs/react';
 import Menu from '~/components/Popper/Menu';
-import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessageIcon, UploadIcon } from 'components/Icon/Icons';
 import Image from 'components/Image';
 import Search from '../Search';
@@ -23,8 +22,17 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
-import { useState } from 'react';
+import { AuthUserContext } from '~/App'
+import { createContext } from 'react';
+import config from '../../../../config';
+import EmailAndPasswordLoginForm from '../../../../features/auth/partials/EmailAndPasswordLoginForm';
+
+
+import Login from 'features/auth/partials/Login';
+import { useContext, useEffect, useState } from 'react';
 const cs = classNames.bind(styles);
+
+export const ModalBodyNameContext = createContext();
 
 const MENU_ITEMS = [
   {
@@ -78,11 +86,8 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-  // const dispatch = useDispatch();
 
-  // const logOut = useCallback(() => {
-  //   dispatch(logout());
-  // }, [dispatch]);
+  const currentUser = useContext(AuthUserContext)//thừa hưởng từ state con Login
 
   //menu phầm acction
   const userMenu = [
@@ -106,27 +111,85 @@ function Header() {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       title: 'Log out',
       setCurrentUser:false,
-      to: "/login",
+      to: "/logout",
       separate: true,
       
     },
   ];
-
-  // const currentUser = useSelector(selectUser);
-  // const { user: currentUser } = useSelector((state) => state.auth);
-  const [currentUser, setCurrentUser] = useState({Login});
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [children, setChildren] = useState(<Login />)
+  const [navigateBack, setNavigateBack] = useState(null)
+  const [modalBodyName, setModalBodyName] = useState('login')
   //searchResult
 
 
   //handle logic in this
   const handleMenuChange = (menuItem) => {
-    switch (menuItem.type) {
+    switch (menuItem.language) {
       case 'Language':
         //handle change language
         break;
-      default:
+      default:break
     }
-  };
+
+  switch (menuItem.to) {
+    case '/logout':
+      localStorage.removeItem('user')
+      window.location.reload()
+      break
+    case '/@profile':
+      window.location.href = `/@${currentUser.data.nickname}`
+      break
+    default:
+      break
+  }
+}
+
+const handleModalBodyName = (value) => {
+  setModalBodyName(value ?? 'login')
+}
+
+const value = {
+  modalBodyName,
+  navigateBack,
+  handleModalBodyName,
+}
+
+useEffect(() => {
+  switch (modalBodyName) {
+    case 'login':
+      setChildren(<Login />)
+      setNavigateBack(null)
+      break
+    case 'signup':
+      // setChildren(<SignUp />)
+      setNavigateBack(null)
+      break
+    case 'login-with-phone':
+      // setChildren(<PhoneAndCodeLoginForm />)
+      setNavigateBack('login-with-email')
+      break
+    case 'login-with-phone-and-password':
+      // setChildren(<PhoneAndPasswordLoginForm />)
+      setNavigateBack('login-with-phone')
+      break
+    case 'login-with-email':
+      setChildren(<EmailAndPasswordLoginForm />)
+      setNavigateBack('login')
+      break
+    case 'reset-password-with-phone':
+      // setChildren(<ResetPasswordWithPhone />)
+      setNavigateBack('login-with-phone-and-password')
+      break
+    case 'reset-password-with-email':
+      // setChildren(<ResetPasswordWithEmail />)
+      setNavigateBack('reset-password-with-phone')
+      break
+    default:
+      setChildren(<Login />)
+      break
+  }
+}, [modalBodyName])
 
 
 
@@ -134,7 +197,7 @@ function Header() {
     <header className={cs('wrapper')}>
       <div className={cs('inner')}>
         <div className={cs('logo')}>
-          <Link to={'/home'}>
+          <Link to={config.routes.home}>
             <img src={images.logo} alt="tiktok" />
           </Link>
           {/* <Button home to={'/'}>
@@ -169,21 +232,40 @@ function Header() {
             </>
           ) : (
             <>
-              <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />} to="/login">
+              <Button rounded lelfIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
-              <Button primary outline to="/login" >
+              <Button primary outline to="/"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setShowAuthModal(true)
+                }} >
                 Login
               </Button>
             </>
           )}
+          {/* menu login */}
+          <ModalBodyNameContext.Provider value={value}>
+            {showAuthModal && (
+              <AuthModal
+                children={children}
+                onClose={() => {
+                  setShowAuthModal(false)
+                  setModalBodyName('')
+                }}
+              />
+            )}
+          </ModalBodyNameContext.Provider>
+
           {/* phần menu avatar action */}
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
-                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/7ed24eae83ade506fd0f42bb175c37e1~c5_100x100.jpeg?x-expires=1666166400&x-signature=FRnTOaBuuYdmMU9XPqSqxcjjMS4%3D"
+              src={currentUser.data.avatar}
+                  alt={currentUser.data.nickname}
+                // src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/7ed24eae83ade506fd0f42bb175c37e1~c5_100x100.jpeg?x-expires=1666166400&x-signature=FRnTOaBuuYdmMU9XPqSqxcjjMS4%3D"
                 className={cs('user-avatar')}
-                alt="Nguyen Van A"
+                // alt="Nguyen Van A"
                 fallback="link ảnh thay thế " //link ảnh thay thế trong th bị lỗi
               />
             ) : (

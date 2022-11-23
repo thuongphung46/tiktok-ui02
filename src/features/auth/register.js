@@ -68,7 +68,7 @@ function App() {
 					placeholder="Password"
 				/>
 				<br />
-				<Button primary type= "submit" value="Register"> Register</Button>
+				<Button primary type= "submit" value="Register">Register</Button>
 				
 			</form>
 				</div>

@@ -1,21 +1,17 @@
-import { Fragment } from 'react';
+import { createContext, Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
 import { DefaultLayout } from 'components/Layout';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
 
 // Configure Firebase
-const config = {
-  apiKey: 'AIzaSyAI8sHfXH-Q2MuGuttkTJhqrlmXUZ4K2mo',
-  authDomain: 'tiktok-ui.firebaseapp.com',
-  // ...
-};
-firebase.initializeApp(config);
+export const AuthUserContext = createContext()
+
 
 function App() {
+  const currentUser = JSON.parse(localStorage.getItem('user'))
   return (
-    <Router>
+    <AuthUserContext.Provider value={currentUser}>
+      <Router>
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
@@ -42,6 +38,9 @@ function App() {
         </Routes>
       </div>
     </Router>
+      </AuthUserContext.Provider>
+      
+    
   );
 }
 

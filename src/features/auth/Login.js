@@ -9,7 +9,6 @@ const Login=({setCurrentUser}) =>{
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-
 	async function loginUser(event) {
 		event.preventDefault()
 		console.log(event);

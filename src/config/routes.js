@@ -5,7 +5,7 @@ const routes = {
   upload: '/upload',
   search: '/search',
   live: '/live',
-  login: '/login',
+  logintest: '/login/phone-or-email',
   register: '/register',
 };
 
