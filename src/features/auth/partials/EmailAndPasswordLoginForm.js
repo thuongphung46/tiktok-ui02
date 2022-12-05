@@ -20,6 +20,7 @@ function EmailAndPasswordLoginForm() {
       .then((data) => {
         if (data.meta && data.meta.token) {
           localStorage.setItem('user', JSON.stringify(data))
+          alert('login successful!')
           window.location.reload()
         } else {
           alert('email or password is invalid! Please try again')
@@ -31,32 +32,7 @@ function EmailAndPasswordLoginForm() {
   }
 
 
-  // async function loginUser(event) {
-	// 	event.preventDefault()
-	// 	console.log(event);
-
-	// 	const response = await fetch('http://localhost:1337/api/login', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({
-	// 			email,
-	// 			password,
-	// 		}),
-	// 	})
-
-	// 	const data = await response.json()
-	// 	if (data.user) {
-
-	// 		localStorage.setItem('token', data.user)
-	// 		alert('Login successful');
-	// 		window.location.href = '/'
-	// 	} else {
-	// 		alert('Please check your username and password')
-	// 	}
-	// }
-
+ 
   return (
     <>
       <div className={cs('overflow-auto')} style={{ flex: '1 1 0%' }}>
@@ -128,10 +104,10 @@ function EmailAndPasswordLoginForm() {
               }}
               type='submit'
 
-              // onClick={(e) => {
-              //   e.preventDefault()
-              //   loginUser()
-              // }}
+              onClick={(e) => {
+                e.preventDefault()
+                loginUser()
+              }}
             >
               Log in
             </Button>

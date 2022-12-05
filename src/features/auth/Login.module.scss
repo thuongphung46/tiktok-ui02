@@ -5,15 +5,13 @@
 .container-register {
   margin: 0px auto;
   margin-top: 60px;
-  width: 1100px;
+  width: 100%;
   padding-top: 16px;
   color: #000;
   text-align: center;
   padding-bottom: 16px;
 }
 .form-register {
-  height: 1000px;
-  width: 1100px;
   box-shadow: rgb(0 0 0 / 6%) 0px 2px 8px;
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
@@ -35,7 +33,7 @@
 
 .form-login-wrapper-w{
   // z-index: 50;
-  top: 180%;
+  top: 36%;
   position: absolute;
   width: 100%;
   left: 0;

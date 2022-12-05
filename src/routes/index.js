@@ -10,7 +10,6 @@ import Upload from 'pages/Upload';
 import Search from 'pages/Search';
 // import Login from '../features/auth/Login';
 // import register from '../features/auth/register';
-import logintest from 'features/auth/partials/EmailAndPasswordLoginForm';
 
 //layout
 import { HeaderOnly } from '~/components/Layout';
@@ -23,7 +22,6 @@ const publicRoutes = [
   { path: config.routes.upload, component: Upload, Layout: HeaderOnly },
   // { path: config.routes.login, component: Login, Layout: HeaderOnly },
   // { path: config.routes.register, component: register, Layout: HeaderOnly },
-  { path: config.routes.logintest, component: logintest, Layout: HeaderOnly },
 
 
 ];

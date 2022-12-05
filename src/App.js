@@ -1,12 +1,11 @@
 import { createContext, Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from '~/routes';
+import { publicRoutes } from './routes';
 import { DefaultLayout } from 'components/Layout';
 
-// Configure Firebase
 export const AuthUserContext = createContext()
 
-
+console.log()
 function App() {
   const currentUser = JSON.parse(localStorage.getItem('user'))
   return (

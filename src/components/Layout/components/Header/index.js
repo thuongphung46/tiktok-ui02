@@ -22,10 +22,11 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
-import { AuthUserContext } from '~/App'
+import { AuthUserContext } from '../../../../App'
 import { createContext } from 'react';
 import config from '../../../../config';
 import EmailAndPasswordLoginForm from '../../../../features/auth/partials/EmailAndPasswordLoginForm';
+import Register from '../../../../features/auth/partials/register'
 
 
 import Login from 'features/auth/partials/Login';
@@ -88,6 +89,7 @@ const MENU_ITEMS = [
 function Header() {
 
   const currentUser = useContext(AuthUserContext)//thừa hưởng từ state con Login
+  // const currentUser = true;//thừa hưởng từ state con Login
 
   //menu phầm acction
   const userMenu = [
@@ -162,7 +164,7 @@ useEffect(() => {
       setNavigateBack(null)
       break
     case 'signup':
-      // setChildren(<SignUp />)
+      setChildren(<Register />)
       setNavigateBack(null)
       break
     case 'login-with-phone':
@@ -261,12 +263,10 @@ useEffect(() => {
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
               <Image
-              src={currentUser.data.avatar}
+                  src={currentUser.data.avatar}
                   alt={currentUser.data.nickname}
-                // src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/7ed24eae83ade506fd0f42bb175c37e1~c5_100x100.jpeg?x-expires=1666166400&x-signature=FRnTOaBuuYdmMU9XPqSqxcjjMS4%3D"
-                className={cs('user-avatar')}
-                // alt="Nguyen Van A"
-                fallback="link ảnh thay thế " //link ảnh thay thế trong th bị lỗi
+                  className={cs('user-avatar')}
+                  fallback={images.noImage} //link ảnh thay thế trong th bị lỗi
               />
             ) : (
               <button className={cs('more-btn')}>
