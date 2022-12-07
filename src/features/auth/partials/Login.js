@@ -13,7 +13,6 @@ import {
 import { ModalBodyNameContext } from '../../../components/Layout/components/Header'
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-// import Button from 'components/Button';
 
 const cs = classNames.bind(styles);
 

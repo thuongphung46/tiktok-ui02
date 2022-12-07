@@ -5,7 +5,6 @@ import { HomeIcon, HomeActiveIcon, UserGroupIcon, UserGroupActiveIcon, LiveIcon,
 // import SuggestedAccounts from '~/componnts/SuggestedAccounts';e
 import config from '~/config';
 import * as userService from '../../../../services/userService'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import SidebarAccountSpinner from './SidebarAccountSpinner'
 import { AuthUserContext } from '~/App'
 import { lazy, Suspense, useContext, useEffect, useState } from 'react';
